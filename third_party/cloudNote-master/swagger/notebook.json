@@ -1,0 +1,835 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.0.0",
+        "title": "<云笔记后台接口文档>"
+    },
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/V1.0/Category/All": {
+            "get": {
+                "summary": "获取所有分组信息",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "description": "获取所有笔记分组信息\n",
+                "tags": [
+                    "Category"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功返回笔记分组信息",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Code": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                },
+                                "Message": {
+                                    "type": "string"
+                                },
+                                "Data": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "Path": {
+                                                "type": "string"
+                                            },
+                                            "Name": {
+                                                "type": "string"
+                                            },
+                                            "NoteCount": {
+                                                "type": "number"
+                                            },
+                                            "CreateTime": {
+                                                "type": "string"
+                                            },
+                                            "UpdateTime": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/V1.0/Category/NoteList": {
+            "post": {
+                "summary": "返回分组信息",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "tags": [
+                    "Category"
+                ],
+                "parameters": [
+                    {
+                        "name": "Path",
+                        "in": "body",
+                        "description": "分组路径",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功返回所有笔记信息",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Code": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                },
+                                "Message": {
+                                    "type": "string"
+                                },
+                                "Data": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "Path": {
+                                                "type": "string"
+                                            },
+                                            "Author": {
+                                                "type": "string"
+                                            },
+                                            "Title": {
+                                                "type": "string"
+                                            },
+                                            "Abstract": {
+                                                "type": "string"
+                                            },
+                                            "AttachmentList": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "Url": {
+                                                            "type": "string"
+                                                        },
+                                                        "Name": {
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/V1.0/Category/Create": {
+            "post": {
+                "summary": "创建分组",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "description": "创建分组\n",
+                "parameters": [
+                    {
+                        "name": "CategoryMessage",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "CategoryName": {
+                                    "type": "string",
+                                    "description": "分组的组名"
+                                },
+                                "CreateTime": {
+                                    "type": "string",
+                                    "description": "创建分组时间"
+                                }
+                            }
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Category"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功返回分组Path 示例:\"/4AF64012E9864C\"",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Code": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                },
+                                "Message": {
+                                    "type": "string"
+                                },
+                                "Data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "Path": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/V1.0/Category/Update": {
+            "post": {
+                "summary": "编辑分组",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "description": "编辑分组\n",
+                "parameters": [
+                    {
+                        "name": "CategoryMessage",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Path": {
+                                    "type": "string",
+                                    "description": "分组的路径 示例:\"/4AF64012E9864C\""
+                                },
+                                "CategoryName": {
+                                    "type": "string",
+                                    "description": "分组的组名"
+                                },
+                                "UpdateTime": {
+                                    "type": "string",
+                                    "description": "分组最后修改时间,时间戳格式，示例：\"4235435214234\""
+                                }
+                            }
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Category"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回成功失败",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Code": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                },
+                                "Message": {
+                                    "type": "string"
+                                },
+                                "Data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "Result": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/V1.0/Category/Delete": {
+            "post": {
+                "summary": "删除分组",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "description": "删除分组\n",
+                "parameters": [
+                    {
+                        "name": "CategoryMessage",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Path": {
+                                    "type": "string",
+                                    "description": "分组的路径 示例:\"/4AF64012E9864C\""
+                                },
+                                "UpdateTime": {
+                                    "type": "string",
+                                    "description": "分组最后修改时间,时间戳格式，示例：\"4235435214234\""
+                                }
+                            }
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Category"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回操作结果：成功/失败",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Code": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                },
+                                "Message": {
+                                    "type": "string"
+                                },
+                                "Data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "Result": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/V1.0/Note/Create": {
+            "post": {
+                "summary": "创建笔记",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "description": "创建笔记\n",
+                "parameters": [
+                    {
+                        "name": "NoteMessage",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Path": {
+                                    "type": "string",
+                                    "description": "笔记所属分组路径 示例:\"/4AF64012E9864C\""
+                                },
+                                "Author": {
+                                    "description": "笔记作者",
+                                    "type": "string"
+                                },
+                                "Title": {
+                                    "description": "笔记标题",
+                                    "type": "string"
+                                },
+                                "Summary": {
+                                    "description": "笔记摘要",
+                                    "type": "string"
+                                },
+                                "Content": {
+                                    "description": "笔记正文",
+                                    "type": "string"
+                                },
+                                "AttachmentList": {
+                                    "description": "笔记附件",
+                                    "type": "string"
+                                },
+                                "CreateTime": {
+                                    "type": "string",
+                                    "description": "笔记的创建时间,时间戳格式，示例：\"4235435214234\""
+                                },
+                                "UpdateTime": {
+                                    "type": "string",
+                                    "description": "笔记最后修改时间,时间戳格式，示例：\"4235435214234\""
+                                }
+                            }
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Note"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Code": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                },
+                                "Message": {
+                                    "type": "string"
+                                },
+                                "Data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "Path": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/V1.0/Note/Update": {
+            "post": {
+                "summary": "修改笔记",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "description": "修改笔记\n",
+                "parameters": [
+                    {
+                        "name": "NoteMessage",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Path": {
+                                    "type": "string",
+                                    "description": "笔记路径 示例:\"/4AF64012E9864C/123TDE3DC\""
+                                },
+                                "Author": {
+                                    "description": "笔记作者",
+                                    "type": "string"
+                                },
+                                "Title": {
+                                    "description": "笔记标题",
+                                    "type": "string"
+                                },
+                                "Summary": {
+                                    "description": "笔记摘要",
+                                    "type": "string"
+                                },
+                                "Content": {
+                                    "description": "笔记正文",
+                                    "type": "string"
+                                },
+                                "AttachmentList": {
+                                    "description": "笔记附件",
+                                    "type": "string"
+                                },
+                                "UpdateTime": {
+                                    "type": "string",
+                                    "description": "笔记最后修改时间,时间戳格式，示例：\"4235435214234\""
+                                }
+                            }
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Note"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回操作结果：成功/失败",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Code": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                },
+                                "Message": {
+                                    "type": "string"
+                                },
+                                "Data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "Result": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/V1.0/Note/Delete": {
+            "post": {
+                "summary": "删除笔记",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "description": "删除笔记\n",
+                "parameters": [
+                    {
+                        "name": "NoteMessage",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Path": {
+                                    "type": "string",
+                                    "description": "笔记路径 示例:\"/4AF64012E9864C/123TDE3DC\""
+                                },
+                                "UpdateTime": {
+                                    "type": "string",
+                                    "description": "笔记最后修改时间,时间戳格式，示例：\"4235435214234\""
+                                }
+                            }
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Note"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回操作结果：成功/失败",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Code": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                },
+                                "Message": {
+                                    "type": "string"
+                                },
+                                "Data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "Result": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/V1.0/Note/Move": {
+            "post": {
+                "summary": "移动笔记",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "description": "移动分组\n",
+                "parameters": [
+                    {
+                        "name": "NoteMessage",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Path": {
+                                    "type": "string",
+                                    "description": "想要移动笔记的路径 示例:\"/4AF64012E9864C/123TDE3DC\""
+                                },
+                                "GoalPath": {
+                                    "type": "string",
+                                    "description": "移动的目标分组路径，示例：\"/5AB0C6B33BD1162\""
+                                }
+                            }
+                        },
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Note"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回操作结果：成功/失败",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Code": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                },
+                                "Message": {
+                                    "type": "string"
+                                },
+                                "Data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "Result": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/V1.0/Resource/TemplateList": {
+            "get": {
+                "summary": "模板获取",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "description": "获取模板\n",
+                "tags": [
+                    "Resource"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回所有模板信息：包括获取路径及名称",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Code": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                },
+                                "Message": {
+                                    "type": "string"
+                                },
+                                "Data": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "Url": {
+                                                "type": "string"
+                                            },
+                                            "Name": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/V1.0/Resource/PaperList": {
+            "get": {
+                "summary": "背景获取",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "description": "获取背景\n",
+                "tags": [
+                    "Resource"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回所有背景信息：包括获取路径及名称",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Code": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                },
+                                "Message": {
+                                    "type": "string"
+                                },
+                                "Data": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "Url": {
+                                                "type": "string"
+                                            },
+                                            "Name": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/V1.0/Attachment/Upload": {
+            "post": {
+                "summary": "上传附件",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "description": "上传附件\n",
+                "parameters": [
+                    {
+                        "name": "Path",
+                        "in": "query",
+                        "description": "上传的附件所属note路径 示例:\"/4AF64012E9864C/123TDE3DC\"",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "File",
+                        "in": "formData",
+                        "description": "文件，",
+                        "required": true,
+                        "type": "file"
+                    }
+                ],
+                "tags": [
+                    "Attachment"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功返回附件路径",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Code": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                },
+                                "Message": {
+                                    "type": "string"
+                                },
+                                "Data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "Url": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/V1.0/Share/Publish": {
+            "post": {
+                "summary": "分享笔记",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "description": "分享\n",
+                "parameters": [
+                    {
+                        "name": "Path",
+                        "in": "body",
+                        "description": "想要分享的资源路径 示例:\"/4AF64012E9864C/123TDE3DC\"",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Share"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功返回分享URL链接",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "Code": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                },
+                                "Message": {
+                                    "type": "string"
+                                },
+                                "Data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "Url": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
